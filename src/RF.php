@@ -29,6 +29,12 @@ class RF
             $checkDigit = $type === 'normal' ? 8 : 9;
         }
 
+        // Only use 4 list digits of customer id
+        // ie 91234 --> 1234, 981234 --> 1234
+        if (strlen($customer) > 4) {
+            $customer = substr($customer, -4);
+        }
+
         $X = '9' .
             substr(str_pad($customer, 4, '0', STR_PAD_LEFT), 0,4) .
             $checkDigit .

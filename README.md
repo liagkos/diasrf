@@ -22,7 +22,7 @@ require 'vendor/autoload.php';
 
 use Liagkos\Banks\Dias\RF;
 
-$merchantId        = '1234';
+$merchantId        = '1234'; // leading '9' is ignored
 $paymentIdentifier = '123456789012345';
 
 $RF = RF::create($merchantId, $paymentIdentifier);
