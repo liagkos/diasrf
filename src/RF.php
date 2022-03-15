@@ -8,7 +8,7 @@ namespace Liagkos\Banks\Dias;
 class RF
 {
     /**
-     * @param $customer     string Merchant's customer id (4 digits)
+     * @param $customer     string Merchant's customer id (last 4 digits, not including leading 9)
      * @param $identifier   string Payment identifier (15 digits)
      * @param $value        float  Optional value to generate check code
      * @param $type         string Default is normal, otherwise set recurring payment (fixed order)
@@ -16,6 +16,8 @@ class RF
      */
     static function create($customer, $identifier, $value = 0, $type = 'normal')
     {
+        $identifier = preg_replace('/[^0-9]/', '', $identifier);
+
         if ($value) {
             $factors = [1, 7, 3, 1, 7, 3, 1, 7, 3, 1, 7];
             $strNum = strrev((string) $value * 100);
